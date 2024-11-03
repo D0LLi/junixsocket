@@ -20,6 +20,7 @@ package org.newsclub.net.unix.rmi;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
@@ -106,7 +107,7 @@ public final class AFUNIXNaming {
 
       File tempFile;
       try {
-        tempFile = File.createTempFile("jux", "-", socketDir);
+        tempFile = Files.createTempFile(socketDir.toPath(), "jux", "-").toFile();
       } catch (IOException e) {
         throw new RemoteException("Cannot create temporary file: " + e.getMessage(), e);
       }
